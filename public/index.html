@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>서가 | Node.js 도서관리 API</title>
+  <meta name="description" content="Node.js로 만든 도서관리 REST API 실습 프로젝트">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">▤</div><div><b>서가</b><small>LIBRARY MANAGER</small></div></div>
+      <nav aria-label="메뉴">
+        <a class="nav-active" href="#library">▦ <span>도서 목록</span></a>
+        <a href="#form-section">⊕ <span>도서 등록</span></a>
+        <a href="#api-guide">⌘ <span>API 안내</span></a>
+      </nav>
+      <div class="sidebar-bottom"><span class="pulse"></span> Node.js REST API<br><small>학습용 도서관리 프로젝트</small></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><span>학습 프로젝트 / 도서관리</span><span class="topbar-tag">API ONLINE</span></header>
+      <div class="content">
+        <section class="intro" id="library">
+          <div class="eyebrow">MY BOOK COLLECTION</div>
+          <h1>나의 작은 서재<span class="period">.</span></h1>
+          <p>도서를 등록하고 수정하며, 목록을 검색하고 관리할 수 있습니다.</p>
+        </section>
+        <section class="stats" aria-label="도서 요약">
+          <div class="stat"><span>전체 도서</span><strong id="total-books">—</strong><small>등록된 도서 수</small></div>
+          <div class="stat"><span>대출 가능</span><strong id="available-books">—</strong><small>현재 이용 가능한 도서</small></div>
+          <div class="stat"><span>대출 중</span><strong id="borrowed-books">—</strong><small>대출된 도서 수</small></div>
+        </section>
+        <section class="panel book-panel">
+          <div class="panel-heading"><div><h2>도서 목록</h2><p>등록된 책을 확인하고 관리하세요.</p></div><a class="button button-primary" href="#form-section">+ 도서 추가</a></div>
+          <div class="search-wrap"><label for="search" class="sr-only">제목이나 저자로 검색</label><span aria-hidden="true">⌕</span><input id="search" placeholder="도서 제목 또는 저자 검색" type="search"></div>
+          <div class="table-wrap"><table><thead><tr><th>도서명</th><th>저자</th><th>출판연도</th><th>상태</th><th>관리</th></tr></thead><tbody id="book-rows"><tr><td colspan="5">도서 목록을 불러오는 중입니다.</td></tr></tbody></table></div>
+          <div class="panel-footer"><span id="list-count">전체 목록</span><a href="/api/books" target="_blank" rel="noopener">JSON 응답 보기 ↗</a></div>
+        </section>
+        <section class="panel edit-panel" id="form-section">
+          <div class="panel-heading"><div><h2 id="form-heading">새 도서 등록</h2><p>아래 항목을 입력한 후 저장하세요.</p></div></div>
+          <form id="book-form">
+            <div class="fields"><label>도서명 <input name="title" maxlength="100" placeholder="예: 어린 왕자" required></label><label>저자 <input name="author" maxlength="60" placeholder="예: 생텍쥐페리" required></label><label>출판연도 <input name="year" type="number" min="1" max="2100" placeholder="예: 1943" required></label><label>도서 상태 <select name="status"><option value="available">대출 가능</option><option value="borrowed">대출 중</option></select></label></div>
+            <div class="form-actions"><button class="button button-quiet" id="cancel-edit" type="button" hidden>수정 취소</button><button class="button button-primary" id="submit-book" type="submit">도서 등록하기</button></div>
+          </form>
+          <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+        </section>
+        <section class="panel guide-panel" id="api-guide"><div class="panel-heading"><div><h2>REST API 안내</h2><p>HTTP 요청으로 도서 데이터를 관리할 수 있습니다.</p></div></div>
+          <div class="api-grid"><span class="method get">GET</span><code>/api/books</code><span>전체 도서 목록 · 검색: ?q=키워드</span><span class="method get">GET</span><code>/api/books/:id</code><span>도서 한 권 조회</span><span class="method post">POST</span><code>/api/books</code><span>새 도서 등록</span><span class="method put">PUT</span><code>/api/books/:id</code><span>도서 정보 수정</span><span class="method delete">DELETE</span><code>/api/books/:id</code><span>도서 삭제</span><span class="method get">GET</span><code>/api/health</code><span>서버 상태 확인</span></div>
+          <p class="hint">POST/PUT 요청은 JSON 형식을 사용합니다. 필드: title(문자열), author(문자열), year(숫자), status(available 또는 borrowed).</p>
+        </section>
+        <footer>© 2026 서가 · Node.js 기본 HTTP 모듈 도서관리 API 과제</footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

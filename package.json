@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-book-library-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "도서관리 REST API 과제 - Node.js HTTP 서버",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  }
+}
